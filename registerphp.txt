@@ -1,0 +1,22 @@
+<?php
+include('config.php'); // Database connection
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    
+    // Hash the password
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    // SQL query to insert new user
+    $sql = "INSERT INTO users (username, password, email, full_name) VALUES ('$username', '$hashed_password', '$email', '$username')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "User registered successfully!";
+        header("Location: login.html"); // Redirect to login page
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+?>

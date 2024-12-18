@@ -1,0 +1,361 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  width: 100%;
+  background: linear-gradient(to right, #008080, #40e0d0);
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.exam_page{
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+}
+
+#demo {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  top: 45%;
+  padding: 5px 15px;
+  margin: 15px 0 ;
+  color: #cf1a1a;
+  border-radius: 17px;
+}
+
+
+.option {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+label{
+  cursor: pointer;
+}
+
+#navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+
+#welcome-page {
+  text-align: center;
+}
+
+#welcome-page h1 {
+  font-size: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #170555;
+  line-height: 64px;
+}
+
+#exam-selection {
+  margin: 20px 0;
+}
+
+#exam-selection label {
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-weight: 550;
+}
+
+#exam-selection select {
+  font-size: 17px;
+  padding: 10px;
+  outline: none;
+}
+
+#proceed-btn {
+  font-size: 18px;
+  background: rgba(253, 250, 250, 0.2);
+  margin-top: 100px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 20px;
+  outline: none;
+  border: 2px dotted #170555;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+#proceed-btn:hover {
+  background-color: rgba(23, 5, 85, 0.8);
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+#prev-btn span,
+#next-btn span {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* Sidebar Styling */
+#sidebar {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  float: right;
+  width: 250px;
+  height: 90vh;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.profile i {
+  position: absolute;
+  margin-top: 40px;
+  font-size: 120px;
+  top: 10%;
+  color: #170555;
+}
+
+#user-name {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+#timer, #demo, #question-counter, #submit-btn, .calc{
+  position: absolute;
+}
+#timer {
+  font-size: 24px;
+  font-weight: bold;
+  color: #170555;
+  top: 40%;
+  /* background: #f4f4f4; */
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin: 1px 0 0;
+}
+
+#question-counter {
+  bottom: 40%;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #170555;
+}
+
+.calc {
+  background-color: #170555;
+  color: #fff;
+  bottom: 70px;
+  padding: 10px 15px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.calc:hover {
+  background-color: #333;
+}
+
+#notifications {
+  margin-top: 20px;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+}
+
+#notifications p {
+  position: absolute;
+  left: 23%;
+  top: 50%;
+  font-weight: bold;
+  margin: 25px 0;
+}
+
+#submit-btn {
+  position: absolute;
+  bottom: 50px;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #4169e1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  width: 120px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#submit-btn:hover {
+  background-color: #3153a5;
+}
+
+/* Main Exam Container */
+#exam-container {
+  margin: 25px 50px;
+  width: 60%;
+  padding: 20px;
+}
+
+#exam-title {
+  font-size: 50px;
+  color: #170555;
+  font-weight: 700;
+  font-family: "Segoe Script", sans-serif;
+  margin-bottom: 30px;
+}
+
+#question-container {
+  margin-bottom: 20px;
+}
+#question-container h2{
+  margin-bottom: 10px;
+}
+#question-container p{
+  margin-bottom: 15px;
+}
+
+#navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+#pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-number {
+  width: 27px;
+  height: 27px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.attempted {
+  background-color: #4169e1;
+}
+
+.unattempted {
+  background-color: #fff;
+}
+
+.correct-answer {
+  background-color: #90ee90;
+  color: #000;
+}
+
+.incorrect-answer {
+  background-color: #ffb6c1;
+  color: #000;
+}
+
+#result {
+  margin: 20px 50px;
+  font-weight: bold;
+}
+
+.correct {
+  color: green;
+  font-weight: bold;
+}
+
+.incorrect {
+  color: red;
+  text-decoration: line-through;
+}
+
+/* Buttons Styling */
+#prev-btn, #next-btn, #new-exam-btn, #review-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4169e1;
+  color: #fff;
+}
+
+#prev-btn:hover, #next-btn:hover, #new-exam-btn:hover, #review-btn:hover {
+  background-color: #3153a5;
+}
+
+/* Calculator Styling */
+.container {
+  display: none;
+  position: fixed;
+  right: 300px;
+  top: 20px;
+  background: #170555;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.container input {
+  text-align: center;
+  width: 35px;
+  height: 35px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 5px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  background: transparent;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.container input.result {
+  width: 190px;
+  font-size: 28px;
+  font-weight: 550;
+  text-align: right;
+  color: #000;
+  background-color: aliceblue;
+  height: 55px;
+}
+
+.container input.operator {
+  color: #33ffd8;
+  font-weight: 750;
+}
+
+#close {
+  color: red;
+  cursor: pointer;
+}
+
+.result{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+  padding: 20px 40px;
+}
+.result button{
+  margin-top: 12px;
+}

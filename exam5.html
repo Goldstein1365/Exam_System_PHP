@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Exam System</title>
+    <link rel="stylesheet" href="exam5.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!---->
+    <section class="exam_page">
+      <div id="exam-container" style="display: none">
+        <div id="welcome-page">
+          <h1>Gifted Minds Academy (G.M.A)</h1>
+          <button id="proceed-btn">Proceed to Exam</button>
+        </div>
+
+        <h1 id="exam-title">G.M.A Exam</h1>
+        <div id="question-container"></div>
+        <div id="navigation">
+          <button id="prev-btn"><span>&lt;&lt;</span> Previous</button>
+          <button id="next-btn">Next <span>&gt;&gt;</span></button>
+        </div>
+        <div id="pagination"></div>
+      </div>
+
+      <div id="result" style="display: none"></div>
+      <div class="result">
+        <button id="new-exam-btn" style="display: none">Start New Exam</button>
+        <button id="review-btn" style="display: none">Review Answers</button>
+      </div>
+
+      <!-- aside bar starts -->
+      <div id="sidebar">
+        <!-- Profile Section -->
+        <div class="profile">
+          <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>
+          <p id="user-name"><?php 
+            session_start();
+            echo $_SESSION['full_name']; ?>
+          </p>
+          <!-- Show user's full name -->
+        </div>
+        <!-- Timer Section -->
+        <div id="timer"></div>
+        <span id="demo"></span>
+        <!-- Question Counter -->
+        <div id="question-counter">
+          <p>Questions Answered: <span id="answered-count">0</span> / <span id="total-questions">10</span></p>
+      </div>
+        <!-- Calculator Button -->
+        <button
+          class="calc"
+          onclick="document.getElementById('calc1').style.display = 'block'"
+        >
+          <i class="fa fa-calculator" aria-hidden="true"></i> Calculator
+        </button>
+        <!-- Submit Button in Sidebar -->
+              <!-- Form that submits the exam results -->
+<form action="submit_exam.php" method="POST" id="examForm">
+  <input type="hidden" name="score" id="score" value="0">
+  <input type="hidden" name="percentage" id="percentage" value="0">
+  <input type="hidden" name="subject" id="subject" value="Physics"> <!-- Set the subject dynamically -->
+
+  <!-- Other form fields for answering questions -->
+  
+  <button type="submit" id="submitBtn">Submit Exam</button>
+</form>
+
+        <!-- <button id="submit-btn">Submit Exam</button> -->
+      </div>
+
+ 
+
+
+
+
+      <div class="container" id="calc1" style="display: none">
+        <form>
+          <div class="display">
+            <input type="text" name="display" class="result" />
+          </div>
+          <div>
+            <input
+              type="button"
+              value="AC"
+              class="operator"
+              onclick="clearDisplay()"
+            />
+            <input
+              type="button"
+              value="DE"
+              class="operator"
+              onclick="deleteLastCharacter()"
+            />
+            <input type="button" value="." onclick="appendCharacter('.')" />
+            <input
+              type="button"
+              value="/"
+              class="operator"
+              onclick="appendCharacter('/')"
+            />
+            <input
+              type="button"
+              value="^"
+              class="operator"
+              onclick="appendCharacter('^')"
+            />
+          </div>
+          <div>
+            <input type="button" value="9" onclick="appendCharacter('9')" />
+            <input type="button" value="8" onclick="appendCharacter('8')" />
+            <input type="button" value="7" onclick="appendCharacter('7')" />
+            <input
+              type="button"
+              value="*"
+              class="operator"
+              onclick="appendCharacter('*')"
+            />
+          </div>
+          <div>
+            <input type="button" value="6" onclick="appendCharacter('6')" />
+            <input type="button" value="5" onclick="appendCharacter('5')" />
+            <input type="button" value="4" onclick="appendCharacter('4')" />
+            <input
+              type="button"
+              value="-"
+              class="operator"
+              onclick="appendCharacter('-')"
+            />
+          </div>
+          <div>
+            <input type="button" value="3" onclick="appendCharacter('3')" />
+            <input type="button" value="2" onclick="appendCharacter('2')" />
+            <input type="button" value="1" onclick="appendCharacter('1')" />
+            <input
+              type="button"
+              value="+"
+              class="operator"
+              onclick="appendCharacter('+')"
+            />
+          </div>
+          <div>
+            <input type="button" value="0" onclick="appendCharacter('0')" />
+            <input type="button" value="00" onclick="appendCharacter('00')" />
+            <input
+              type="button"
+              value="="
+              class="operator"
+              onclick="calculateResult()"
+            />
+            <input
+              type="button"
+              value="X"
+              id="close"
+              onclick="document.getElementById('calc1').style.display = 'none'"
+            />
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <script src="exam5.js"></script>
+    <script src="question.js"></script>
+    <script>
+      // Function to get the exam code from the URL
+      function getExamCode() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get("exam"); // Get the 'exam' parameter from the URL
+      }
+
+      window.onload = function () {
+        const examCode = getExamCode();
+        if (examCode) {
+          document.getElementById("exam-title").innerText =
+            "You are taking: " + examCode;
+          startExam(); // Start the exam immediately if exam code is present
+        } else {
+          document.getElementById("exam-title").innerText = "No exam selected.";
+        }
+
+        // document
+        //   .getElementById("proceed-btn")
+        //   .addEventListener("click", startExam);
+        document.addEventListener("keydown", (n) => {
+          if (n.keyCode === 80) {
+            if (currentQuestion > 0) {
+              currentQuestion--;
+              showQuestion();
+            }
+          }
+        });
+
+        document.addEventListener("keydown", (n) => {
+          if (n.keyCode === 78) {
+            if (currentQuestion < questions.length - 1) {
+              currentQuestion++;
+              showQuestion();
+            }
+          }
+        });
+
+        document
+          .getElementById("new-exam-btn")
+          .addEventListener("click", () => {
+            window.location.href = "exam_selection.php"; // Redirect to the exam selection page
+          });
+
+        document
+          .getElementById("review-btn")
+          .addEventListener("click", reviewAnswers);
+      };
+
+      //using the letter S button to submit the exam
+      document.addEventListener("keydown", (e) => {
+        if (e.keyCode === 83) {
+          submitExam();
+          console.log("Letter S is pressed");
+        }
+      });
+    </script>
+  </body>
+</html>
+-
